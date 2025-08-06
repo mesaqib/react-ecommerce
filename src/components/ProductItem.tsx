@@ -3,9 +3,22 @@ import HeartIconEffect from "./HeartIconEffect";
 
 import useFetchData from "../hooks/useFetchData";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/addToCart";
 
-const ProductItem = ({title, images, description, price, id }) => {
-  
+
+interface ProductItemProps {
+  id: string;
+  title: string;
+  images: string[];
+  description: string;
+  price: number;
+  quantity: number;
+}
+
+const ProductItem: React.FC<ProductItemProps>  = ({title, images, description, price, id }) => {
+
+  const dispatch = useDispatch();
 
   function AddToCart(e) {
     e.stopPropagation()
@@ -18,7 +31,7 @@ const ProductItem = ({title, images, description, price, id }) => {
       price,
       id
     }
-    console.log(newData)
+    dispatch(addToCart(newData))
   }
 
   return (
@@ -44,7 +57,7 @@ const ProductItem = ({title, images, description, price, id }) => {
                <CartIcon/>
           </button>
           <div className="border-1 border-violet-700 text-violet-700 text-sm px-4 py-1 rounded-full">
-            $ {price}
+            $ {price.toFixed(2)}
           </div>
         </div>
 

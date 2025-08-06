@@ -1,39 +1,37 @@
-import React from "react";
+import useFetchData from "../hooks/useFetchData";
+import Loading from "./Loading";
 
 const Filter = () => {
+  const { data, loading } = useFetchData(
+    "https://dummyjson.com/products/category-list"
+  );
+
+  if (loading) return <Loading />;
+
+ 
+
   return (
     <div className="w-72 p-4 text-sm text-gray-800 space-y-8 font-sans">
-
       {/* Category */}
       <div>
         <h3 className="font-bold text-lg text-violet-800 mb-2">Category</h3>
         <div className="space-y-1">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-violet-600" />
-            <span>Shoes</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-violet-600" />
-            <span>Clothing</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-violet-600" />
-            <span>Accessories</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-violet-600" />
-            <span>Bags</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-violet-600" />
-            <span>Electronics</span>
-          </label>
+          {data?.map((item, index) => (
+            <label className="flex items-center gap-2" key={index}>
+              <input type="checkbox" className="accent-violet-600" 
+               
+              />
+              <span>{item}</span>
+            </label>
+          ))}
         </div>
       </div>
 
       {/* Filter by Price (Fixed Ranges) */}
       <div>
-        <h3 className="font-bold text-lg text-violet-800 mb-2">Filter by Price</h3>
+        <h3 className="font-bold text-lg text-violet-800 mb-2">
+          Filter by Price
+        </h3>
         <div className="space-y-1">
           <label className="flex items-center gap-2">
             <input type="checkbox" className="accent-pink-500" />
@@ -69,7 +67,6 @@ const Filter = () => {
           <span>₹10,000+</span>
         </div>
       </div>
-
     </div>
   );
 };

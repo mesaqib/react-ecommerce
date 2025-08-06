@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { CartIcon, HamBurgerIcon, ProfileIcon } from "../icons/Icons";
 import SearchBar from "./SearchBar";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(window.innerHeight < 1024);
+
+  const {items} = useSelector((state) => state.cart)
+
+  const totalItem = items.length;
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,7 +74,7 @@ const Header = () => {
 
                 {/* Badge */}
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md">
-                  3
+                 {totalItem}
                 </span>
               </Link>
             </div>

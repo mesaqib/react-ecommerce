@@ -8,8 +8,8 @@ import ProductItem from '../components/ProductItem'
 
 const AllProducts = () => {
 
-  const {data, loading} = useFetchData("https://dummyjson.com/products")
-
+const {data, loading} = useFetchData("https://dummyjson.com/products")
+//  console.log(data);
   return (
      <>
       <div className="allProdcuts px-10">
