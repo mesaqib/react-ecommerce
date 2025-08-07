@@ -41,23 +41,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="category_section my-30 px-20">
-        <h1 className="text-center text-3xl mb-20">All Category</h1>
-        <div className="flex justify-center gap-5 items-center flex-wrap">
-          {loadingCategories ? (
-            <Loading />
-          ) : (
-            categories?.map((item, index) => (
-              <div
-                key={index}
-                className="bg-amber-200 rounded text-center h-30 w-30 flex justify-center items-center"
-              >
-                {item}
-              </div>
-            ))
-          )}
-        </div>
-      </div>
+    
     </>
   );
 };

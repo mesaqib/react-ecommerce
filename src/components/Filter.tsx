@@ -1,15 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import useFetchData from "../hooks/useFetchData";
 import Loading from "./Loading";
+import { addCategory } from "../redux/features/filtering";
 
 const Filter = () => {
   const { data, loading } = useFetchData(
     "https://dummyjson.com/products/category-list"
   );
 
+  const select = useSelector((state) => state.filtering.items)
+  const dispatch =useDispatch()
+
   if (loading) return <Loading />;
-
- 
-
   return (
     <div className="w-72 p-4 text-sm text-gray-800 space-y-8 font-sans">
       {/* Category */}
@@ -19,7 +21,8 @@ const Filter = () => {
           {data?.map((item, index) => (
             <label className="flex items-center gap-2" key={index}>
               <input type="checkbox" className="accent-violet-600" 
-               
+              checked={select.includes(item)}
+              onChange={() => dispatch(addCategory(item))}
               />
               <span>{item}</span>
             </label>
@@ -28,7 +31,7 @@ const Filter = () => {
       </div>
 
       {/* Filter by Price (Fixed Ranges) */}
-      <div>
+      {/* <div>
         <h3 className="font-bold text-lg text-violet-800 mb-2">
           Filter by Price
         </h3>
@@ -50,10 +53,10 @@ const Filter = () => {
             <span>Above ₹5000</span>
           </label>
         </div>
-      </div>
+      </div> */}
 
       {/* Price Range (Slider) */}
-      <div>
+      {/* <div>
         <h3 className="font-bold text-lg text-violet-800 mb-2">Price Range</h3>
         <input
           type="range"
@@ -66,7 +69,7 @@ const Filter = () => {
           <span>₹100</span>
           <span>₹10,000+</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
